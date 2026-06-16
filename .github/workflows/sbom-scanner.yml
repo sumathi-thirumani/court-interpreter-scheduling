@@ -13,7 +13,7 @@ permissions:
    
 jobs:
   generate-sbom:
-    uses: sumathi-thirumani/shared-gha-tools/.github/workflows/sbom-generation.yml@feature/sbom-scanner
+    uses: sumathi-thirumani/shared-gha-tools/.github/workflows/sbom-vulnerability-management.yml@feature/sbom-scanner
     with:
       source_path: .
       enable_filesystem_scan: true
@@ -21,5 +21,3 @@ jobs:
       upload_artifacts: true
       artifact_prefix: sbom
       artifact_retention_days: 3
-    secrets:
-      PAT: ${{ secrets.GHA_TOKEN }}
