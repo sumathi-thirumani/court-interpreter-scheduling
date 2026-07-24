@@ -298,7 +298,7 @@ export default class SearchInterpretersTable extends Vue {
 
     public disableBookingButton(booking){
         if(this.bookingDates.length==0) return true
-        if(booking.length>0){
+        if(Array.isArray(booking) && booking.length>0){
             const interpreterBusyDates = _.flatten(booking.map(item=> bookedDateTimesTZ(item?.dates, item?.location?.timezone)))
             return courtBookingDateTimesConflict(this.bookingDates, interpreterBusyDates, this.searchLocation.timezone)
         }else

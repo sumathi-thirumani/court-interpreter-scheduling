@@ -1,8 +1,9 @@
 
 import re
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, selectinload, load_only, with_loader_criteria
 from sqlalchemy import func
 from models.court_location_model import CourtDistanceModel
+from models.court_location_model import CourtLocationModel
 from models.interpreter_model import InterpreterModel
 from models.language_model import InterpreterLanguageModel
 from models.booking_model import BookingDatesModel, BookingModel
@@ -32,7 +33,41 @@ def fetch_interpreters(request: InterpreterSearchRequestSchema, db: Session, use
     if not check_user_roles(['cis-admin','super-admin'],username,db):
         request.active = True
 
-    interpreter = db.query(InterpreterModel).join(InterpreterLanguageModel).where(InterpreterModel.disabled==False)
+    booking_loader = (selectinload(InterpreterModel.booking)
+        .options(
+            load_only(BookingModel.location_id),
+            selectinload(BookingModel.location).options(
+                load_only(
+                    CourtLocationModel.id,
+                    CourtLocationModel.name,
+                    CourtLocationModel.location_code,
+                    CourtLocationModel.short_description,
+                    CourtLocationModel.timezone,
+                )
+            ),
+            selectinload(BookingModel.dates).options(
+                load_only(
+                    BookingDatesModel.date,
+                    BookingDatesModel.start_time,
+                    BookingDatesModel.finish_time,
+                    BookingDatesModel.method_of_appearance,
+                    BookingDatesModel.status,
+                )
+            ),
+        )
+    )
+
+    query_options = [selectinload(InterpreterModel.languages)]
+
+    active_date_filter = BookingDatesModel.status != BookingStatusEnum.CANCELLED.value
+    query_options.append(booking_loader)
+    query_options.append(with_loader_criteria(BookingDatesModel, active_date_filter, include_aliases=True))
+
+    interpreter = (db.query(InterpreterModel)
+        .options(*query_options)
+        .join(InterpreterLanguageModel)
+        .where(InterpreterModel.disabled==False)
+    )
 
     interpreter = apply_language(interpreter, request.languageId)
     interpreter = apply_level(interpreter, request.level)
@@ -58,6 +93,9 @@ def fetch_interpreters(request: InterpreterSearchRequestSchema, db: Session, use
 
     # run query to get data
     all_interpreters = interpreter.all()
+
+    for inter in all_interpreters:
+        inter.booking = [b for b in inter.booking if getattr(b, 'dates', None)]
 
     return add_court_info(all_interpreters, request.location, db), total_count_of_filtered_interpreters
 
