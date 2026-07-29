@@ -257,25 +257,22 @@ def get_filepath_of_excel_sheet_have_interpreters_data(interpreter_request, db: 
     interpreters, _ = fetch_interpreters(interpreter_request, db, username)
     
     csv_file = io.StringIO()
-    column_names = InterpreterModel.__table__.columns.keys()
-    
-    
-    for key in EXCEL_KEYS_TO_REMOVE:
-        column_names.remove(key)
+    base_column_names = [
+        column_name for column_name in InterpreterModel.__table__.columns.keys()
+        if column_name not in EXCEL_KEYS_TO_REMOVE
+    ]
+    column_names = EXCEL_KEYS_TO_ADD + base_column_names
 
-    for key in EXCEL_KEYS_TO_ADD:
-        column_names.insert(0,key)
-
-    file_obj = csv.DictWriter(csv_file, column_names)
+    file_obj = csv.DictWriter(csv_file, column_names, extrasaction='ignore')
     # file_obj.writeheader()
     file_obj.writerow(beautify_header(column_names))
     for interpreter in interpreters:
         
         languages = interpreter.languages
-        interpreter_in_dict = get_beautify_interpreter_data(interpreter.__dict__)
+        interpreter_in_dict = get_beautify_interpreter_data(interpreter, base_column_names)
         for language in languages:    
-            interpreter_in_dict = add_language_to_interpreter_data(interpreter_in_dict, language.__dict__)
-            file_obj.writerow(interpreter_in_dict)
+            export_row = add_language_to_interpreter_data(interpreter_in_dict.copy(), language.__dict__)
+            file_obj.writerow(export_row)
 
     csv_file.seek(0)
     response = StreamingResponse(csv_file, media_type="text/csv")
@@ -284,9 +281,11 @@ def get_filepath_of_excel_sheet_have_interpreters_data(interpreter_request, db: 
 
 
 
-def get_beautify_interpreter_data(interpreter_in_dict: dict):
-    for key in EXCEL_KEYS_TO_REMOVE + ['_sa_instance_state']+['languages']:
-        interpreter_in_dict.pop(key, None)
+def get_beautify_interpreter_data(interpreter: InterpreterModel, export_columns: List[str]):
+    interpreter_in_dict = {
+        column_name: getattr(interpreter, column_name, None)
+        for column_name in export_columns
+    }
 
     # interpreter_in_dict['contract_valid'] = "Yes" if interpreter_in_dict['contract_valid'] else "No"
     # interpreter_in_dict['completed_training'] = "Yes" if interpreter_in_dict['completed_training'] else "No"
