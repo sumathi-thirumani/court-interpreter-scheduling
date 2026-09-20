@@ -1,5 +1,5 @@
 # Web / API
-fastapi~=0.125.0
+fastapi~=0.141.1
 uvicorn>=0.15.0
 fastapi_sqlalchemy
 pydantic>=1.4.0,<2
