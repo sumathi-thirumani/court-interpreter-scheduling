@@ -15,17 +15,18 @@
   "packageRules": [
     {
       "description": "Regenerate npm lockfiles consistently",
-      "matchManagers": ["npm"],
+      "matchManagers": [
+        "npm"
+      ],
       "postUpdateOptions": [
         "npmInstallTwice"
       ]
     },
-    // ==========================================================
-    // NPM / Vue
-    // ==========================================================
     {
       "description": "Vue CLI ecosystem",
-      "matchManagers": ["npm"],
+      "matchManagers": [
+        "npm"
+      ],
       "matchPackageNames": [
         "@vue/cli-plugin-babel",
         "@vue/cli-plugin-eslint",
@@ -34,14 +35,14 @@
         "@vue/cli-plugin-vuex",
         "@vue/cli-service"
       ],
-      
       "groupName": "Vue CLI",
       "groupSlug": "vue-cli"
     },
-
     {
       "description": "Vue core ecosystem",
-      "matchManagers": ["npm"],
+      "matchManagers": [
+        "npm"
+      ],
       "matchPackageNames": [
         "vue",
         "vue-template-compiler",
@@ -52,14 +53,14 @@
         "vue-class-component",
         "vue-property-decorator"
       ],
-      
       "groupName": "Vue core",
       "groupSlug": "vue-core"
     },
-
     {
       "description": "Vue plugins",
-      "matchManagers": ["npm"],
+      "matchManagers": [
+        "npm"
+      ],
       "matchPackageNames": [
         "vue-axios",
         "vue-cookies",
@@ -69,14 +70,14 @@
         "vue-cli-plugin-vuetify",
         "vuetify"
       ],
-      
       "groupName": "Vue plugins",
       "groupSlug": "vue-plugins"
     },
-
     {
       "description": "ESLint and TypeScript linting",
-      "matchManagers": ["npm"],
+      "matchManagers": [
+        "npm"
+      ],
       "matchPackageNames": [
         "eslint",
         "eslint-plugin-vue",
@@ -84,81 +85,77 @@
         "@typescript-eslint/parser",
         "@vue/eslint-config-typescript"
       ],
-      
       "groupName": "ESLint and TypeScript linting",
       "groupSlug": "eslint-typescript"
     },
-
     {
       "description": "TypeScript tooling",
-      "matchManagers": ["npm"],
+      "matchManagers": [
+        "npm"
+      ],
       "matchPackageNames": [
         "typescript",
         "ts-loader"
       ],
-      
       "groupName": "TypeScript",
       "groupSlug": "typescript"
     },
-
     {
       "description": "Jest tooling",
-      "matchManagers": ["npm"],
+      "matchManagers": [
+        "npm"
+      ],
       "matchPackageNames": [
         "jest",
         "@types/jest",
         "ts-jest"
       ],
-      
       "groupName": "Jest",
       "groupSlug": "jest"
     },
-
     {
       "description": "Sass tooling",
-      "matchManagers": ["npm"],
+      "matchManagers": [
+        "npm"
+      ],
       "matchPackageNames": [
         "sass",
         "sass-loader"
       ],
-      
       "groupName": "Sass",
       "groupSlug": "sass"
     },
-
     {
       "description": "Bootstrap ecosystem",
-      "matchManagers": ["npm"],
+      "matchManagers": [
+        "npm"
+      ],
       "matchPackageNames": [
         "bootstrap",
         "bootstrap-vue",
         "@bcgov/bootstrap-theme"
       ],
-      
       "groupName": "Bootstrap",
       "groupSlug": "bootstrap"
     },
-
     {
       "description": "Axios ecosystem",
-      "matchManagers": ["npm"],
+      "matchManagers": [
+        "npm"
+      ],
       "matchPackageNames": [
         "axios",
         "axios-auth-refresh",
         "vue-axios"
       ],
-      
       "groupName": "Axios",
       "groupSlug": "axios"
     },
-
-    // ==========================================================
-    // PYTHON
-    // ==========================================================
-
     {
       "description": "FastAPI ecosystem",
-      "matchManagers": ["pip-compile"],
+      "matchManagers": [
+        "pip-compile"
+      ],
       "matchPackageNames": [
         "fastapi",
         "starlette",
@@ -169,14 +166,14 @@
         "typing-inspection",
         "anyio"
       ],
-      
       "groupName": "FastAPI",
       "groupSlug": "python-fastapi"
     },
-
     {
       "description": "Python database ecosystem",
-      "matchManagers": ["pip-compile"],
+      "matchManagers": [
+        "pip-compile"
+      ],
       "matchPackageNames": [
         "sqlalchemy",
         "alembic",
@@ -186,14 +183,14 @@
         "mako",
         "markupsafe"
       ],
-      
       "groupName": "Python database",
       "groupSlug": "python-database"
     },
-
     {
       "description": "Python authentication and cryptography",
-      "matchManagers": ["pip-compile"],
+      "matchManagers": [
+        "pip-compile"
+      ],
       "matchPackageNames": [
         "cryptography",
         "bcrypt",
@@ -207,14 +204,14 @@
         "cffi",
         "pycparser"
       ],
-      
       "groupName": "Python authentication and cryptography",
       "groupSlug": "python-auth-crypto"
     },
-
     {
       "description": "Python HTTP ecosystem",
-      "matchManagers": ["pip-compile"],
+      "matchManagers": [
+        "pip-compile"
+      ],
       "matchPackageNames": [
         "requests",
         "urllib3",
@@ -222,26 +219,26 @@
         "charset-normalizer",
         "idna"
       ],
-      
       "groupName": "Python HTTP",
       "groupSlug": "python-http"
     },
-
     {
       "description": "Python ASGI server",
-      "matchManagers": ["pip-compile"],
+      "matchManagers": [
+        "pip-compile"
+      ],
       "matchPackageNames": [
         "uvicorn",
         "h11"
       ],
-      
       "groupName": "Uvicorn",
       "groupSlug": "python-uvicorn"
     },
-
     {
       "description": "Python data processing",
-      "matchManagers": ["pip-compile"],
+      "matchManagers": [
+        "pip-compile"
+      ],
       "matchPackageNames": [
         "pandas",
         "numpy",
@@ -251,14 +248,14 @@
         "pytz",
         "tzdata"
       ],
-      
       "groupName": "Python data processing",
       "groupSlug": "python-data"
     },
-
     {
       "description": "Python testing",
-      "matchManagers": ["pip-compile"],
+      "matchManagers": [
+        "pip-compile"
+      ],
       "matchPackageNames": [
         "pytest",
         "pluggy",
@@ -269,9 +266,182 @@
         "exceptiongroup",
         "tomli"
       ],
-      
       "groupName": "Python testing",
       "groupSlug": "python-testing"
+    },
+    {
+      "matchPackageNames": [
+        "@typescript-eslint/eslint-plugin"
+      ],
+      "allowedVersions": ">=4.13.0 <5"
+    },
+    {
+      "matchPackageNames": [
+        "@typescript-eslint/parser"
+      ],
+      "allowedVersions": ">=8.71.1 <9"
+    },
+    {
+      "matchPackageNames": [
+        "@vue/cli-plugin-babel"
+      ],
+      "allowedVersions": ">=5.0.9 <6"
+    },
+    {
+      "matchPackageNames": [
+        "@vue/cli-plugin-eslint"
+      ],
+      "allowedVersions": ">=5.0.9 <6"
+    },
+    {
+      "matchPackageNames": [
+        "@vue/cli-plugin-router"
+      ],
+      "allowedVersions": ">=5.0.9 <6"
+    },
+    {
+      "matchPackageNames": [
+        "@vue/cli-plugin-typescript"
+      ],
+      "allowedVersions": ">=5.0.9 <6"
+    },
+    {
+      "matchPackageNames": [
+        "@vue/cli-service"
+      ],
+      "allowedVersions": ">=5.0.9 <6"
+    },
+    {
+      "matchPackageNames": [
+        "@vue/eslint-config-typescript"
+      ],
+      "allowedVersions": ">=14.9.0 <15"
+    },
+    {
+      "matchPackageNames": [
+        "axios"
+      ],
+      "allowedVersions": ">=0.34.0 <1"
+    },
+    {
+      "matchPackageNames": [
+        "bootstrap-vue"
+      ],
+      "allowedVersions": ">=2.23.1 <3"
+    },
+    {
+      "matchPackageNames": [
+        "eslint"
+      ],
+      "allowedVersions": ">=6.8.0 <7"
+    },
+    {
+      "matchPackageNames": [
+        "eslint-plugin-vue"
+      ],
+      "allowedVersions": ">=10.11.1 <11"
+    },
+    {
+      "matchPackageNames": [
+        "fastapi"
+      ],
+      "allowedVersions": ">=0.133.0 <1"
+    },
+    {
+      "matchPackageNames": [
+        "jest"
+      ],
+      "allowedVersions": ">=30.5.2 <31"
+    },
+    {
+      "matchPackageNames": [
+        "moment-timezone"
+      ],
+      "allowedVersions": ">=0.5.35 <1"
+    },
+    {
+      "matchPackageNames": [
+        "node-sass"
+      ],
+      "allowedVersions": ">=7.0.3 <8"
+    },
+    {
+      "matchPackageNames": [
+        "raw-loader"
+      ],
+      "allowedVersions": ">=4.0.2 <5"
+    },
+    {
+      "matchPackageNames": [
+        "sass"
+      ],
+      "allowedVersions": ">=1.105.1 <2"
+    },
+    {
+      "matchPackageNames": [
+        "sass-loader"
+      ],
+      "allowedVersions": ">=17.0.1 <18"
+    },
+    {
+      "matchPackageNames": [
+        "save"
+      ],
+      "allowedVersions": ">=2.9.0 <3"
+    },
+    {
+      "matchPackageNames": [
+        "showdown"
+      ],
+      "allowedVersions": ">=2.1.0 <3"
+    },
+    {
+      "matchPackageNames": [
+        "ts-jest"
+      ],
+      "allowedVersions": ">=29.4.6 <30"
+    },
+    {
+      "matchPackageNames": [
+        "ts-loader"
+      ],
+      "allowedVersions": ">=9.6.2 <10"
+    },
+    {
+      "matchPackageNames": [
+        "underscore"
+      ],
+      "allowedVersions": ">=1.13.8 <2"
+    },
+    {
+      "matchPackageNames": [
+        "vue"
+      ],
+      "allowedVersions": ">=3.5.43 <4"
+    },
+    {
+      "matchPackageNames": [
+        "vue-cli-plugin-vuetify"
+      ],
+      "allowedVersions": ">=2.5.8 <3"
+    },
+    {
+      "matchPackageNames": [
+        "vue-fontawesome-icon"
+      ],
+      "allowedVersions": ">=1.3.2 <2"
+    },
+    {
+      "matchPackageNames": [
+        "vue-resource"
+      ],
+      "allowedVersions": ">=1.5.3 <2"
+    },
+    {
+      "matchPackageNames": [
+        "vuetify"
+      ],
+      "allowedVersions": ">=3.0.0a10 <4"
     }
   ]
 }
